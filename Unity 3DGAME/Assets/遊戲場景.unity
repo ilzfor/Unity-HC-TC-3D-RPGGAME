@@ -600,6 +600,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 9aff7e537dd697a44b11be1c658971d2,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6bd08d4c310deac44a606ede64a923e4, type: 2}
     - target: {fileID: -5442063021681150150, guid: 9aff7e537dd697a44b11be1c658971d2,
         type: 3}
       propertyPath: m_IsActive
@@ -728,7 +733,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 9aff7e537dd697a44b11be1c658971d2,
         type: 3}
       propertyPath: m_Name
-      value: Set SD Unity-chan Optimaize Custom AtlasVer
+      value: "\u5C0FU\u91AC"
       objectReference: {fileID: 0}
     - target: {fileID: -126607242231360451, guid: 9aff7e537dd697a44b11be1c658971d2,
         type: 3}
