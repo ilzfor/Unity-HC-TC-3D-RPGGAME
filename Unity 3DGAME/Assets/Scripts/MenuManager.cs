@@ -15,6 +15,8 @@ public class MenuManager : MonoBehaviour
     public Image imgLoading;
     [Header("要載入的場景名稱")]
     public string nameScene = "遊戲場景";
+    [Header("提示")]
+    public GameObject tip;
     /// <summary>
     /// 離開遊戲
     /// </summary>
@@ -39,9 +41,14 @@ public class MenuManager : MonoBehaviour
         //當場景載入完成
         while(!ao.isDone)
         {
-            textLoading.text = ao.progress * 100 + "%";
-            imgLoading.fillAmount = ao.progress;
+            textLoading.text = (ao.progress/0.9f * 100).ToString("F0") + "%";
+            imgLoading.fillAmount = ao.progress/0.9f;
             yield return null;
+            if(ao.progress==0.9f)
+            {
+                tip.SetActive(true);
+                if (Input.anyKeyDown) ao.allowSceneActivation = true;
+            }
         }
     }
 }
