@@ -9,15 +9,21 @@ public class Player : MonoBehaviour
     [Header("旋轉角度"), Range(0, 1000)]
     public float turn = 60;
 
-    private float attack = 10;
-    private float hp = 100;
-    private float mp = 50;
+    private float attack = 10f;
+    private float hp = 100f;
+    private float mp = 50f;
     private float exp;
     private int lv = 1;
-
+    //在屬性面板上隱藏
+    [HideInInspector]
+    /// <summary>
+    /// 停止不能移動
+    /// </summary>
+    public bool stop;
     private Rigidbody rig;
     private Animator ani;
     private Transform cam;//攝影機根物件
+    private NPC npc;
     #endregion
     #region 事件
     private void Awake()
@@ -27,10 +33,20 @@ public class Player : MonoBehaviour
         rig = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         cam=GameObject.Find("攝影機根物件").transform;
+
+        npc = FindObjectOfType<NPC>();
     }
     private void FixedUpdate()
     {
-        Move();
+        if (stop) return;//如果 停止 跳出
+        
+            Move();
+       
+        
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "寶石") GetProp(collision.gameObject);
     }
     #endregion
     #region 方法
@@ -60,9 +76,15 @@ public class Player : MonoBehaviour
     {
 
     }
-    private void GetProp()
+    /// <summary>
+    /// 取得道具
+    /// </summary>
+    /// <param name="prop">碰到的道具</param>
+    private void GetProp(GameObject prop)
     {
-
+        Destroy(prop);
+        //播放音效
+        npc.UpdateTextMission();
     }
     private void Hit()
     {
