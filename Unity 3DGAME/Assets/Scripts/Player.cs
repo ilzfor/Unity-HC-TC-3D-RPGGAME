@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -17,9 +18,14 @@ public class Player : MonoBehaviour
 
     [Header("傳送門:0 NPC，1殭屍")]
     public Transform[] doors;
+    [Header("介面區塊")]
+    public Image barHP;
+    public Image barMP;
+    public Image barEXP;
 
     private float attack = 10f;
-    private float hp = 100f;
+    private float hp = 300f;
+    private float maxhp = 300f;
     private float mp = 50f;
     private float exp;
     private int lv = 1;
@@ -114,13 +120,20 @@ public class Player : MonoBehaviour
         //播放音效
         npc.UpdateTextMission();
     }
-    private void Hit()
+    public void Hit(float damage,Transform direction)
     {
-        
+        hp -= damage;
+        ani.SetTrigger("受傷");
+        rig.AddForce(direction.forward * 100 + direction.up * 150);
+
+        hp = Mathf.Clamp(hp, 0, 99999);
+        barHP.fillAmount = hp / maxhp;
+        if (hp == 0) Dead();
     }
     private void Dead()
     {
-
+        ani.SetBool("死亡", true);
+        enabled = false;
     }
     private void Exp()
     {
