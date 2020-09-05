@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -9,17 +8,22 @@ public class Player : MonoBehaviour
     [Header("旋轉角度"), Range(0, 1000)]
     public float turn = 60;
 
-    private float attack = 10f;
-    private float hp = 100f;
-    private float mp = 50f;
-    private float exp;
-    private int lv = 1;
     //在屬性面板上隱藏
     [HideInInspector]
     /// <summary>
     /// 停止不能移動
     /// </summary>
     public bool stop;
+
+    [Header("傳送門:0 NPC，1殭屍")]
+    public Transform[] doors;
+
+    private float attack = 10f;
+    private float hp = 100f;
+    private float mp = 50f;
+    private float exp;
+    private int lv = 1;
+
     private Rigidbody rig;
     private Animator ani;
     private Transform cam;//攝影機根物件
@@ -48,8 +52,32 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "寶石") GetProp(collision.gameObject);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.name == "傳送門-NPC")
+        {
+            transform.position = doors[1].position;
+            doors[1].GetComponent<CapsuleCollider>().enabled = false;
+            Invoke("OpenDoorBUG", 3);
+        }
+        if (other.name == "傳送門-甲蟲")
+        {
+            transform.position = doors[0].position;
+            doors[0].GetComponent<CapsuleCollider>().enabled = false;
+            Invoke("OpenDoorNPC", 3);
+        }
+
+    }
     #endregion
     #region 方法
+    private void OpenDoorNPC()
+    {
+        doors[0].GetComponent<CapsuleCollider>().enabled = true;
+    }
+    private void OpenDoorBUG()
+    {
+        doors[1].GetComponent<CapsuleCollider>().enabled = true;
+    }
     /// <summary>
     /// 移動方法:前後左右移動與動畫
     /// </summary>
