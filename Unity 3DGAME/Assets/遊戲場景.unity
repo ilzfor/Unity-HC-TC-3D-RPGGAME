@@ -5272,6 +5272,10 @@ MonoBehaviour:
   barHP: {fileID: 2075888480}
   barMP: {fileID: 1714410705}
   barEXP: {fileID: 1670717480}
+  textLv: {fileID: 1158624582}
+  stone: {fileID: 5412462943790765981, guid: 73f0707a73ae19c4e886ba5b9eb46b2c, type: 3}
+  stoneDamage: 200
+  stoneCost: 10
 --- !u!1001 &256718566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7581,7 +7585,7 @@ GameObject:
   - component: {fileID: 1158624583}
   - component: {fileID: 1158624582}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TextLv
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20523,21 +20527,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u602A\u7269"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7457683796329888927, guid: a4dced4c76ebf0a47828aea2b2af2c40,
-        type: 3}
-      propertyPath: speed
-      value: 1.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 7457683796329888927, guid: a4dced4c76ebf0a47828aea2b2af2c40,
-        type: 3}
-      propertyPath: distanceAttack
-      value: 2.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 7457683796329888927, guid: a4dced4c76ebf0a47828aea2b2af2c40,
-        type: 3}
-      propertyPath: cd
-      value: 3.29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4dced4c76ebf0a47828aea2b2af2c40, type: 3}

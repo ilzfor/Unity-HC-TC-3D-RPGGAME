@@ -22,13 +22,22 @@ public class Player : MonoBehaviour
     public Image barHP;
     public Image barMP;
     public Image barEXP;
+    public Text textLv;
+    [Header("流星雨")]
+    public Transform stone;
+    [HideInInspector]
+    public float stoneDamage = 200;
+    public float stoneCost = 10;
 
     private float attack = 100f;
     private float hp = 300f;
     private float maxhp = 300f;
+    private float maxmp = 50f;
     private float mp = 50f;
     private float exp;
+    private float maxExp = 100;
     private int lv = 1;
+    private float restoreMp = 5;
 
     private Rigidbody rig;
     private Animator ani;
@@ -49,6 +58,8 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Attack();
+        Skill();
+        RestoreMp();
     }
     private void FixedUpdate()
     {
@@ -118,6 +129,16 @@ public class Player : MonoBehaviour
     }
     private void Skill()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            if(stoneCost<=mp)
+            {
+                mp -= stoneCost;
+                barMP.fillAmount = mp / maxmp;
+                Vector3 pos = transform.forward * 2 + transform.up * 3.5f;
+                Instantiate(stone, transform.position + pos, transform.rotation);
+            }
+        }
 
     }
     /// <summary>
@@ -145,9 +166,33 @@ public class Player : MonoBehaviour
         ani.SetBool("死亡", true);
         enabled = false;
     }
-    private void Exp()
+    public void Exp(float getExp)
     {
+        exp += getExp;
+        barEXP.fillAmount = exp/maxExp;
+    }
+    private void LVLUP()
+    {
+        lv++;
+        maxhp += 10;
+        maxmp += 4;
+        attack += 10;
+        stoneDamage += 10;
 
+        hp = maxhp;
+        mp = maxmp;
+        exp -= maxExp;
+
+        barHP.fillAmount = 1;
+        barMP.fillAmount = 1;
+        barEXP.fillAmount = exp/maxExp;
+        textLv.text = "LV." + lv;
+    }
+    private void RestoreMp()
+    {
+        mp += restoreMp * Time.deltaTime;
+        mp = Mathf.Clamp(mp, 0, maxmp);
+        barMP.fillAmount = mp / maxmp;
     }
     #endregion
 

@@ -541,13 +541,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc5d1edfff186947a5453d024ef3c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.027
+  speed: 1.83
   attack: 40
   hp: 200
   exp: 30
-  distanceAttack: 2.94
-  cd: 1.79
+  distanceAttack: 2.13
+  cd: 3.29
   turn: 2.6
+  gem: {fileID: 7077633395039712070, guid: 6a5e55830c20c7c42812bcaad9616a1c, type: 3}
+  gemprop: 0.358
 --- !u!195 &7457683796329888926
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1679,7 +1681,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7457683796439884634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
