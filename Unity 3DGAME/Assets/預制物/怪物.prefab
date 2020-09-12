@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 7457683796329888926}
   m_Layer: 0
   m_Name: "\u602A\u7269"
-  m_TagString: Untagged
+  m_TagString: "\u602A\u7269"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -545,8 +545,8 @@ MonoBehaviour:
   attack: 40
   hp: 200
   exp: 30
-  distanceAttack: 2.632
-  cd: 5
+  distanceAttack: 2.94
+  cd: 1.79
   turn: 2.6
 --- !u!195 &7457683796329888926
 NavMeshAgent:

@@ -23,14 +23,17 @@ public class Enemy : MonoBehaviour
     private Transform player;//玩家
     private float timer;//計時器
 
+    private Rigidbody rig;
+
     private void Awake()
     {
-        nav = GetComponent<NavMeshAgent>();       //取得導航代理器器
         ani = GetComponent<Animator>();           //取得動畫控制器
+        nav = GetComponent<NavMeshAgent>();       //取得導航代理器器
         nav.speed = speed;                        //設定速度
         nav.stoppingDistance = distanceAttack;    //設定攻擊停止距離
         player = GameObject.Find("U醬").transform;//取得玩家
         nav.SetDestination(player.position);      //避免一開始就進行攻擊動作
+        rig = GetComponent<Rigidbody>();
     }
     private void Update()
     {
@@ -62,9 +65,25 @@ public class Enemy : MonoBehaviour
         Quaternion look = Quaternion.LookRotation(player.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, look, Time.deltaTime * turn);
         timer += Time.deltaTime; //計時器累加
+        if(timer>=cd)
         {
             timer = 0;
             ani.SetTrigger("攻擊");
         }
+    }
+    public void Hit(float damage, Transform direction)
+    {
+        hp -= damage;
+        ani.SetTrigger("受傷");
+        rig.AddForce(direction.forward * 100 + direction.up * 150);
+
+        hp = Mathf.Clamp(hp, 0, 99999);
+        if (hp == 0) Dead();   
+
+    }
+    private void Dead()
+    {
+        ani.SetBool("死亡", true);
+        enabled = false;
     }
 }

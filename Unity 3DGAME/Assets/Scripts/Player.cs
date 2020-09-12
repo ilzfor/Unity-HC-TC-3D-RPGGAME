@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public Image barMP;
     public Image barEXP;
 
-    private float attack = 10f;
+    private float attack = 100f;
     private float hp = 300f;
     private float maxhp = 300f;
     private float mp = 50f;
@@ -45,6 +45,10 @@ public class Player : MonoBehaviour
         cam=GameObject.Find("攝影機根物件").transform;
 
         npc = FindObjectOfType<NPC>();
+    }
+    private void Update()
+    {
+        Attack();
     }
     private void FixedUpdate()
     {
@@ -72,7 +76,10 @@ public class Player : MonoBehaviour
             doors[0].GetComponent<CapsuleCollider>().enabled = false;
             Invoke("OpenDoorNPC", 3);
         }
-
+        if(other.tag == "怪物")
+        {
+            other.GetComponent<Enemy>().Hit(attack, transform);
+        }
     }
     #endregion
     #region 方法
@@ -104,7 +111,10 @@ public class Player : MonoBehaviour
     }
     private void Attack()
     {
-
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            ani.SetTrigger("攻擊");
+        }
     }
     private void Skill()
     {
